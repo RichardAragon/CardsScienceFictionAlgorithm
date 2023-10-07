@@ -1,5 +1,6 @@
 # CardsScienceFictionAlgorithm
 An algorithm designed to distill the Science Fiction essence of Orson Scott Card
+
 Card's Science Fiction Algorithm = (Strong Protagonist Algorithm + Complex Character Algorithm + Rich Worldbuilding Algorithm + Thought-Provoking Theme Algorithm) * (Originality Algorithm + Sense of Humor Algorithm)
 
 Each of the individual algorithms would need to be developed and implemented separately. However, the overall algorithm would work by generating a story that contains all of the elements of Orson Scott Card's writing.
