@@ -1,0 +1,75 @@
+import random
+import numpy as np
+
+class Protagonist:
+    def __init__(self, intelligence, resourcefulness, strength, motivation):
+        self.intelligence = intelligence
+        self.resourcefulness = resourcefulness
+        self.strength = strength
+        self.motivation = motivation
+
+    def fitness(self):
+        return self.intelligence + self.resourcefulness + self.strength + self.motivation
+
+def generate_population(population_size):
+    population = []
+    for i in range(population_size):
+        protagonist = Protagonist(random.random(), random.random(), random.random(), random.random())
+        population.append(protagonist)
+
+    return population
+
+def selection(population):
+    parents = []
+    for i in range(2):
+        parent = population[random.randint(0, len(population) - 1)]
+        parents.append(parent)
+
+    return parents
+
+def crossover(parent1, parent2):
+    child = Protagonist(
+        (parent1.intelligence + parent2.intelligence) / 2,
+        (parent1.resourcefulness + parent2.resourcefulness) / 2,
+        (parent1.strength + parent2.strength) / 2,
+        (parent1.motivation + parent2.motivation) / 2,
+    )
+
+    return child
+
+def mutation(child):
+    mutation_rate = 0.1
+
+    if random.random() < mutation_rate:
+        child.intelligence += np.random.normal(0, 0.1)
+    if random.random() < mutation_rate:
+        child.resourcefulness += np.random.normal(0, 0.1)
+    if random.random() < mutation_rate:
+        child.strength += np.random.normal(0, 0.1)
+    if random.random() < mutation_rate:
+        child.motivation += np.random.normal(0, 0.1)
+
+    return child
+
+def genetic_algorithm(population_size, generations):
+    population = generate_population(population_size)
+
+    for i in range(generations):
+        parents = selection(population)
+        child = crossover(parents[0], parents[1])
+        child = mutation(child)
+
+        population.append(child)
+
+        population = sorted(population, key=lambda protagonist: protagonist.fitness(), reverse=True)[:population_size]
+
+    return population[0]
+
+# Example usage:
+
+protagonist = genetic_algorithm(population_size=100, generations=1000)
+
+print(protagonist.intelligence)
+print(protagonist.resourcefulness)
+print(protagonist.strength)
+print(protagonist.motivation)
